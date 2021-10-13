@@ -85,4 +85,86 @@ public class MemberController {
         return newArr;
     }
 
+    public Member searchEmail(String email) {
+        for (Member member : m) {
+            if (member == null) break;
+            if (email.equals(member.getEmail())) {
+                return member;
+            }
+        }
+        return null;
+    }
+
+    //패스워드 변경
+
+    /**
+     * 비밀번호를 변경하는 메서드
+     * @param id 변경을 원하는 회원의 아이디
+     * @param password 새로운 비밀번호
+     * @return 변경 성공 여부 - 성공시 true, 실패시 false
+     */
+    public boolean updatePassword(String id, String password) {
+        Member member = searchId(id);
+        if (member != null) {
+            member.setPassword(password);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean updateName(String id, String name) {
+        Member member = searchId(id);
+        if (member != null) {
+            member.setName(name);
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public boolean updateEmail(String id, String email) {
+        Member member = searchId(id);
+        if (member != null) {
+            member.setEmail(email);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //회원정보 한명을 삭제하는 메서드
+    public boolean delete(String id) {
+        int delIdx = -1; //삭제 대상 인덱스
+        //삭제 대상 인덱스 탐색
+        int count = existMemberNum();
+        for (int i = 0; i < count; i++) {
+            if (id.equals(m[i].getId())) {
+                delIdx = i;
+                break;
+            }
+        }
+
+        //삭제 알고리즘
+        if (delIdx != -1) {
+            for (int i = delIdx; i < count - 1; i++) {
+                m[i] = m[i+1];
+            }
+            //마지막 데이터 null로 변경
+            m[count - 1] = null;
+            return true;
+        }
+        return false;
+    }
+
+    //회원정보 전체 삭제
+    public void delete() {
+        int count = existMemberNum();
+        for (int i = 0; i < count; i++) {
+            m[i] = null;
+        }
+    }
+
+    public Member[] printAll() {
+        return m;
+    }
+
 }
