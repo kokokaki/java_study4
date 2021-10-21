@@ -13,7 +13,13 @@ public class Roulette {
         int playerNum = 2;
         while (true) {
             System.out.print("게임 인원 (2 ~ 4명) ==> ");
-            playerNum = sc.nextInt();
+            try {
+                playerNum = sc.nextInt();
+            } catch (Exception e) {
+                sc.nextLine();
+                System.out.println("2~4사이의 정수만 입력하세요!");
+                continue;
+            }
 
             if (playerNum < 2 || playerNum > 4) {
                 System.out.println("인원 수가 올바르지 않습니다.\n");
@@ -33,9 +39,18 @@ public class Roulette {
         }
         System.out.println(Arrays.toString(players) + " 참가! ");
 
-        System.out.print("\n실탄 개수 (6 미만) ==> ");
-        int bulletNum = sc.nextInt();
-        sc.nextLine();
+        int bulletNum = 0;
+        while (true) {
+            try {
+                System.out.print("\n실탄 개수 (6 미만) ==> ");
+                bulletNum = sc.nextInt();
+                sc.nextLine();
+                break;
+            } catch (Exception e) {
+                sc.nextLine();
+                System.out.println("6미만의 정수만 입력하세요.");
+            }
+        }
 
         //탄창 배열을 생성
         boolean[] magazine = new boolean[6];

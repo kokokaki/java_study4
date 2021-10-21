@@ -68,7 +68,7 @@ public class Car {
     }
 
     //시동을 거는 기능
-    public void engineStart() {
+    public void engineStart() throws NullPointerException, IndexOutOfBoundsException {
         System.out.println("시동이 걸립니다.");
         startFlag = true;
         injectGasoline();
@@ -76,7 +76,7 @@ public class Car {
     }
 
     //연료가 분사되는 기능
-    private void injectGasoline() {
+    private void injectGasoline() throws NullPointerException {
         if (startFlag) {
             System.out.println("연료가 엔진에 주입됩니다.");
         } else {
@@ -85,7 +85,7 @@ public class Car {
     }
 
     //실린더가 작동하는 기능
-    private void moveCylinder() {
+    private void moveCylinder() throws IndexOutOfBoundsException {
         if (startFlag) {
             System.out.println("실린더가 움직입니다.");
         } else {
